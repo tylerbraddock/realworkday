@@ -1,1 +1,82 @@
 @import "bootstrap";
+
+
+.bg-color {
+  background-color: white;
+}
+
+.navbar {
+  border-bottom: 2px solid #093F61;
+  box-shadow: 0px 1px 1px #2a2a2a;
+}
+
+.navbar-light a.navbar-brand {
+  color: #093F61;
+  font-weight: bold;
+}
+
+.navbar-light a.navbar-brand:hover {
+  color: #3881B0;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: #093F61;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.hero {
+  background: image_url('hero.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  height: 500px;
+  border-bottom: 5px solid #093F61;
+  box-shadow: 0px 1px 3px #2a2a2a;
+}
+
+.start-here {
+  background-color: rgba(207, 207, 207, 0.70);
+  box-shadow: 0px 3px 8px #2a2a2a;
+  top: 145px;
+  padding: 10px;
+}
+
+hr {
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+.path {
+  padding-top: 10px;
+
+}
+
+.path h5 {
+  padding-bottom: 5px;
+}
+
+.path-right {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #093F61;
+  border-color: #173549;
+}
+
+.btn-primary:hover {
+  background-color: #3881B0;
+  border-color: #3881B0;
+}
+
+.btn:focus {
+  color: white;
+}
+
+.btn {
+  border-radius: 0;
+}
