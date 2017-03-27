@@ -1,5 +1,11 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
 
+
+body {
+  background: image_url('fabric_of_squares_gray.png');
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 .bg-color {
   background-color: white;
@@ -13,7 +19,15 @@
 .navbar-light a.navbar-brand {
   color: #093F61;
   font-weight: bold;
+  font-family: 'Satisfy', cursive;
+  font-size: 1.75rem;
+  padding-bottom: 0;
 }
+
+button, input, optgroup, select, textarea {
+  margin-top: 3px;
+}
+
 
 .navbar-light a.navbar-brand:hover {
   color: #3881B0;
@@ -36,6 +50,9 @@ h1, h2, h3, h4, h5, h6 {
   height: 500px;
   border-bottom: 5px solid #093F61;
   box-shadow: 0px 1px 3px #2a2a2a;
+  margin-bottom: 30px;
+  background-color: #2a2a2a;
+  /*background-blend-mode: difference;*/
 }
 
 .start-here {
@@ -79,4 +96,22 @@ hr {
 
 .btn {
   border-radius: 0;
+}
+
+@media (max-width: 575px) {
+  .hero h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .hero h5 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 852px) and (max-width: 963px) {
+  #discover-p {
+    margin-top: 21px;
+  }
 }
