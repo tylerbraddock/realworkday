@@ -57,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
 .start-here {
   background-color: rgba(207, 207, 207, 0.70);
   box-shadow: 0px 3px 8px #2a2a2a;
-  top: 145px;
+  top: 125px;
   padding: 10px;
   border-radius: 10px;
 }
@@ -154,6 +154,10 @@ hr {
 @media (min-width: 576px) {
   .faded-small {
     width: 5%;
+  }
+
+  .start-here {
+    top: 145px;
   }
 }
 
