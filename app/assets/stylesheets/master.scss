@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero {
-  background: image_url('hero.jpg') no-repeat center center fixed;
+  background: image_url('hero2.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -60,6 +60,13 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0px 3px 8px #2a2a2a;
   top: 145px;
   padding: 10px;
+  border-radius: 10px;
+}
+
+.hero h4 {
+  color: #093F61;
+  font-weight: bold;
+  font-family: 'Satisfy', cursive;
 }
 
 hr {
@@ -113,5 +120,40 @@ hr {
 @media (min-width: 852px) and (max-width: 963px) {
   #discover-p {
     margin-top: 21px;
+  }
+}
+
+.share-box {
+  background-color: white;
+  padding: 20px;
+}
+
+.faded {
+  border: 0;
+  height: 1px;
+  width: 60%;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-image: linear-gradient(to right, rgba(56, 129, 176, 0), rgba(56, 129, 176, 0.75), rgba(56, 129, 176, 0));
+}
+
+.faded-small {
+  width: 10%;
+}
+
+.para-marg {
+  margin-top: 1rem;
+  text-align: justify;
+}
+
+.share-box h2 {
+  color: #093F61;
+  font-weight: bold;
+  font-family: 'Satisfy', cursive;
+}
+
+@media (min-width: 576px) {
+  .faded-small {
+    width: 5%;
   }
 }
