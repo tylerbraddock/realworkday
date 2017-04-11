@@ -1,0 +1,8 @@
+<h1>New Workday</h1>
+
+<%= simple_form_for @workday do |f| %>
+  <%= f.input :job_title %>
+  <%= f.input :industry %>
+  <%= f.input :description %>
+  <%= f.submit "Contribute" %>
+<% end %>
