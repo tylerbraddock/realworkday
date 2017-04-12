@@ -25,6 +25,22 @@
               <a class="nav-link" href="#">Link</a>
             </li>
           </ul>
+          <u1 class="navbar-nav">
+            <% if current_user %>
+              <li class="nav-item">
+                <%= link_to current_user.username, '#', class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Sign in", new_user_session_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign up", new_user_registration_path, class: 'nav-link' %>
+              </li>
+            <% end %>
         </div>
       </nav>
 
@@ -35,7 +51,7 @@
       <% if alert.present? %>
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
-      
+
       <%= yield %>
 
     </div>
