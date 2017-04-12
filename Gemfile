@@ -59,3 +59,6 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 
 # use for forms
 gem 'simple_form'
+
+# use for user authentication
+gem 'devise'
