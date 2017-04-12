@@ -15,4 +15,18 @@ RSpec.describe WorkdaysController, type: :controller do
     end
   end
 
+  describe "workday#create" do
+    it "should create new workday in database" do
+      workday1 = FactoryGirl.attributes_for(:workday)
+      post :create, params: { workday: workday1 }
+
+      expect(response).to redirect_to workdays_path
+
+      work = Workday.last
+      expect(work.job_title).to eq(workday1[:job_title])
+      expect(work.industry).to eq(workday1[:industry])
+      expect(work.description).to eq(workday1[:description])
+    end
+  end
+
 end
