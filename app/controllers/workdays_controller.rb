@@ -1,5 +1,5 @@
 class WorkdaysController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
   end
@@ -19,33 +19,43 @@ class WorkdaysController < ApplicationController
   end
 
   def show
-    @workday = Workday.find_by_id(params[:id])
-    return render plain: 'Not Found :-(', status: :not_found if @workday.blank?
+    return render_status(:not_found) if current_workday.blank?
   end
 
   def edit
-    @workday = Workday.find_by_id(params[:id])
-    return render plain: 'Not Found :-(', status: :not_found if @workday.blank?
-    return render plain: 'Forbidden :-(', status: :forbidden if @workday.user != current_user
+    return render_status(:not_found) if current_workday.blank?
+    return render_status(:forbidden) if current_workday.user != current_user
   end
 
   def update
-    @workday = Workday.find_by_id(params[:id])
-    return render plain: 'Not Found :-(', status: :not_found if @workday.blank?
-    return render plain: 'Forbidden :-(', status: :forbidden if @workday.user != current_user
+    return render_status(:not_found) if current_workday.blank?
+    return render_status(:forbidden) if current_workday.user != current_user
 
-    @workday.update_attributes(workday_params)
+    current_workday.update_attributes(workday_params)
 
-    if @workday.valid?
+    if current_workday.valid?
       redirect_to workdays_path
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
+  def destroy
+    return render_status(:not_found) if current_workday.blank?
+    return render_status(:forbidden) if current_workday.user != current_user
+
+    current_workday.destroy
+    redirect_to root_path
+  end
+
   private
 
   def workday_params
     params.require(:workday).permit(:job_title, :industry, :description)
+  end
+
+  helper_method :current_workday
+  def current_workday
+    @workday ||= Workday.find_by_id(params[:id])
   end
 end

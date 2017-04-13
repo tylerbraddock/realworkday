@@ -153,4 +153,41 @@ RSpec.describe WorkdaysController, type: :controller do
       expect(workday1.description).to eq 'Initial'
     end
   end
+
+  describe "workdays#destroy" do
+    it "should allow user to successfully destroy workday" do
+      workday1 = FactoryGirl.create(:workday)
+      sign_in workday1.user
+
+      delete :destroy, params: { id: workday1.id }
+      expect(response).to redirect_to root_path
+
+      workday1 = Workday.find_by_id(workday1.id)
+      expect(workday1).to eq nil
+    end
+
+    it "should return HTTP status 404 if workday not found" do
+      user = FactoryGirl.create(:user)
+      sign_in user
+
+      delete :destroy, params: { id: 'fake_id' }
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "should require user to be authenticated before destroying workday" do
+      workday1 = FactoryGirl.create(:workday)
+
+      delete :destroy, params: { id: workday1.id }
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "should prevent user who did not create workday from destroying it" do
+      workday1 = FactoryGirl.create(:workday)
+      user = FactoryGirl.create(:user)
+      sign_in user
+
+      delete :destroy, params: { id: workday1.id }
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
 end
