@@ -82,7 +82,7 @@ RSpec.describe WorkdaysController, type: :controller do
     it "should return HTTP status code 404 if workday not found" do
       user = FactoryGirl.create(:user)
       sign_in user
-      
+
       get :edit, params: { id: 'fake_id' }
       expect(response).to have_http_status(:not_found)
     end
@@ -103,4 +103,54 @@ RSpec.describe WorkdaysController, type: :controller do
     end
   end
 
+  describe "workdays#update" do
+    it "should successfully update workday" do
+      workday1 = FactoryGirl.create(:workday, job_title: 'Job')
+      sign_in workday1.user
+
+      patch :update, params: { id: workday1.id, workday: { job_title: 'Changed' } }
+      expect(response).to redirect_to workdays_path
+
+      workday1.reload
+      expect(workday1.job_title).to eq 'Changed'
+    end
+
+    it "should return HTTP status code 404 if workday not found" do
+      user = FactoryGirl.create(:user)
+      sign_in user
+
+      patch :update, params: { id: 'fake_id', workday: { job_title: 'Changed' } }
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "should require user to be authenticated before updating workday" do
+      workday1 = FactoryGirl.create(:workday)
+
+      patch :update, params: { id: workday1.id, workday: { job_title: 'Changed' } }
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "should prevent users who did not create workday from updating workday" do
+      workday1 = FactoryGirl.create(:workday)
+      user = FactoryGirl.create(:user)
+      sign_in user
+
+      patch :update, params: { id: workday1.id, workday: { job_title: 'Changed' } }
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it "should properly address validation errors" do
+      workday1 = FactoryGirl.create(:workday, job_title: 'Initial', industry: 'Initial', description: 'Initial')
+      sign_in workday1.user
+
+      patch :update, params: { id: workday1.id, workday: { job_title: '', industry: '', description: '' } }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+
+      workday1.reload
+      expect(workday1.job_title).to eq 'Initial'
+      expect(workday1.industry).to eq 'Initial'
+      expect(workday1.description).to eq 'Initial'
+    end
+  end
 end

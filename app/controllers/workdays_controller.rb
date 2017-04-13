@@ -1,5 +1,5 @@
 class WorkdaysController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def index
   end
@@ -27,6 +27,20 @@ class WorkdaysController < ApplicationController
     @workday = Workday.find_by_id(params[:id])
     return render plain: 'Not Found :-(', status: :not_found if @workday.blank?
     return render plain: 'Forbidden :-(', status: :forbidden if @workday.user != current_user
+  end
+
+  def update
+    @workday = Workday.find_by_id(params[:id])
+    return render plain: 'Not Found :-(', status: :not_found if @workday.blank?
+    return render plain: 'Forbidden :-(', status: :forbidden if @workday.user != current_user
+
+    @workday.update_attributes(workday_params)
+
+    if @workday.valid?
+      redirect_to workdays_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
