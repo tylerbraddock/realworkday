@@ -70,4 +70,37 @@ RSpec.describe WorkdaysController, type: :controller do
     end
   end
 
+  describe "workdays#edit" do
+    it "should successfully show edit form if workday is found" do
+      workday1 = FactoryGirl.create(:workday)
+      sign_in workday1.user
+
+      get :edit, params: { id: workday1.id }
+      expect(response).to have_http_status(:success)
+    end
+
+    it "should return HTTP status code 404 if workday not found" do
+      user = FactoryGirl.create(:user)
+      sign_in user
+      
+      get :edit, params: { id: 'fake_id' }
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "should require user to be authenticated before accessing edit form" do
+      workday1 = FactoryGirl.create(:workday)
+      get :edit, params: { id: workday1.id }
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "should prevent user who did not create workday from accessing edit form" do
+      workday1 = FactoryGirl.create(:workday)
+      user = FactoryGirl.create(:user)
+      sign_in user
+
+      get :edit, params: { id: workday1.id }
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
+
 end

@@ -1,5 +1,5 @@
 class WorkdaysController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
 
   def index
   end
@@ -21,6 +21,12 @@ class WorkdaysController < ApplicationController
   def show
     @workday = Workday.find_by_id(params[:id])
     return render plain: 'Not Found :-(', status: :not_found if @workday.blank?
+  end
+
+  def edit
+    @workday = Workday.find_by_id(params[:id])
+    return render plain: 'Not Found :-(', status: :not_found if @workday.blank?
+    return render plain: 'Forbidden :-(', status: :forbidden if @workday.user != current_user
   end
 
   private
