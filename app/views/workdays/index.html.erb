@@ -1,1 +1,20 @@
-<h1>Workdays</h1>
+<!--<div class="col-8 offset-2 col-sm-6 offset-sm-3 content-box text-center">
+  <h2>Discover Workdays</h2>
+</div>-->
+
+<div class="col-10 offset-1">
+  <% @workdays.each do |workday| %>
+    <div class="content-box">
+      <div class="float-left job-title-box">
+        <h4><%= workday.job_title %></h4>
+      </div>
+      <div class="float-right industry-box">
+        <h4><%= workday.industry %></h4>
+      </div>
+
+      <br class="clear" />
+
+      <p><%= truncate workday.description, length: 450, separator: ' ', omission: '...(continued)' %></p>
+    </div>
+  <% end %>
+</div>

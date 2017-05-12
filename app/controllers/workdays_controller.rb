@@ -2,6 +2,7 @@ class WorkdaysController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @workdays = Workday.all
   end
 
   def new

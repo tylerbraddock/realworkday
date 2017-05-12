@@ -1,8 +1,10 @@
-<h2>Edit Workday</h2>
+<div class="col-10 offset-1 col-sm-6 offset-sm-3 form-box">
+  <h2>Edit Workday</h2>
 
-<%= simple_form_for @workday do |f| %>
-  <%= f.input :job_title %>
-  <%= f.input :industry %>
-  <%= f.input :description %>
-  <%= f.submit 'Update' %>
-<% end %>
+  <%= simple_form_for @workday do |f| %>
+    <%= f.input :job_title %>
+    <%= f.input :industry %>
+    <%= f.input :description %>
+    <%= f.submit 'Update', class: 'btn form-button col-12' %>
+  <% end %>
+</div>
