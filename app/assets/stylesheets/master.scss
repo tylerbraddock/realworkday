@@ -37,6 +37,13 @@ button, input, optgroup, select, textarea {
   border-color: #093F61;
 }
 
+/*@media (min-width: 992px) {
+  .nav-link:hover {
+    border: 1px solid #3881B0;
+    border-radius: 5px;
+  }
+}*/
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
@@ -143,6 +150,7 @@ hr {
 .share-box {
   background-color: white;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .faded {
@@ -237,4 +245,9 @@ abbr[title] {
 
 input#user_remember_me.boolean.optional {
   margin-right: 5px;
+}
+
+.work-index h2 {
+  margin-top: 30px;
+  color: #093F61;
 }
